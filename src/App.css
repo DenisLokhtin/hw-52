@@ -33,14 +33,24 @@
 }
 
 .table td {
-  padding: 5px;
+  padding: 7px;
 }
 
 .col-2 {
   border: 3px solid yellow;
   border-top: none;
   border-bottom: none;
-  display: block;
+}
+
+.col-2, .col-3, .col-4, .col-5, .col-6 {
+  text-align: right;
+}
+
+.col-3, .col-4, .col-5 {
+  border: 3px solid yellow;
+  border-top: none;
+  border-bottom: none;
+  border-left: none;
 }
 
 .info {
