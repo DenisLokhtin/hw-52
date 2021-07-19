@@ -5,31 +5,32 @@ import './CSS-Playing-Cards/cards.css';
 
 const values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'D', 'K', 'T'];
 const suits = ['D', 'H', 'C', 'S'];
-const deck = [];
 
 class CardDeck {
+
     constructor() {
+        this.deck = [];
+        this.hand = []
         for (let i = 0; i < 4; i++) {
             for (let j = 0; j < 13; j++) {
-                deck.push({suit: suits[i], value: values[j]})
+                this.deck.push({suit: suits[i], value: values[j]})
             }
         }
     }
 
     getCard() {
-        const randomNumber = Math.floor(Math.random() * (deck.length + 1));
-        const removed = deck.splice(randomNumber, 1);
+        const randomNumber = Math.floor(Math.random() * (this.deck.length + 1));
+        const removed = this.deck.splice(randomNumber, 1);
+        console.log(removed[0])
+        return removed[0]
     }
 
     getCards(howMany) {
         for (let i = 0; i < howMany; i++) {
-            this.getCards();
+            this.hand.push(this.getCard());
         }
     }
 }
-
-const cards = new CardDeck();
-cards.getCard();
 
 class App extends Component {
 
@@ -49,6 +50,17 @@ class App extends Component {
   //   this.setState({numbers});
   //   console.log(this.state.numbers)
   // }
+
+    state = {
+      hand: [],
+      cardDeck: null,
+    }
+
+    constructor() {
+        super();
+        const cardDeck = new CardDeck();
+        this.setState({hand: cardDeck.getCards(5), cardDeck: cardDeck,})
+    }
 
   render() {
     return (
@@ -138,11 +150,11 @@ class App extends Component {
             </div>
 
             <div className="cards">
-                <Cards rank="7" suits="D"/>
-                <Cards/>
-                <Cards/>
-                <Cards/>
-                <Cards/>
+                {
+                    for (let h = 0; h < 5; h++) {
+                    <Cards rank=${this.hand[h].value} suits=${this.hand[h].suit} suitFigure=${this.hand[h].suit}/>
+                }
+                }
             </div>
 
             <div className="btns">
